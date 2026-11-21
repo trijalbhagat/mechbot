@@ -131,6 +131,13 @@ class Bot:
         return action
 
 def main():
+    # mechfight/1 startup handshake. The checker launches the image with
+    # positional arguments such as `check requirements`, but communication
+    # still happens over stdin/stdout. Announce readiness immediately, before
+    # waiting for the first input line.
+    print(json.dumps({"type":"ready","protocol":"mechfight/1"},
+                     separators=(",",":")), flush=True)
+
     bot=Bot()
     for line in sys.stdin:
         try:

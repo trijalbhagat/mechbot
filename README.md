@@ -14,9 +14,12 @@ A lightweight Python bot designed for the Builders Mech Royale constraints: 10 H
 ## Important integration note
 The official kit download endpoint rejected automated retrieval with HTTP 403, so this archive could not be validated against the exact `protocol.md` JSON Schema. The bot emits the documented conceptual fields `move`, `aim`, and `fire`, plus optional `weapon`. Compare the final action shape with the Python starter in `mechfight-kit.tar.gz`; if its wrapper uses different field names, keep `Bot.decide()` and map its returned values in `main()`.
 
+## Protocol startup
+The process writes `{"type":"ready","protocol":"mechfight/1"}` immediately on stdout, before reading stdin. Positional arguments supplied by the match runner do not block startup.
+
 ## Quick test
 ```bash
-cat sample_observation.jsonl | python3 bot.py
+python3 bot.py check requirements < sample_observation.jsonl
 ```
 
 ## Submission workflow
